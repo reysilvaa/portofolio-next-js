@@ -1,9 +1,34 @@
+"use client";
 import Link from 'next/link';
-import { JSX } from 'react';
+import { JSX, useState, useEffect } from 'react';
 
 export default function Navbar(): JSX.Element {
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY) {
+        setIsVisible(false); // Hide on scroll down
+      } else {
+        setIsVisible(true); // Show on scroll up
+      }
+      setLastScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [lastScrollY]);
+
   return (
-    <nav className="flex justify-between items-center mb-16">
+    <nav 
+      className={`fixed top-0 left-0 w-full flex justify-between items-center bg-white z-50 px-6 py-4 transition-transform duration-300 ${
+        isVisible ? 'transform translate-y-0' : 'transform -translate-y-full'
+      }`}
+    >
       <Link href="/" className="text-3xl font-bold text-yellow-400">Rey.</Link>
       <div className="hidden md:flex space-x-8">
         <Link href="/" className="hover:text-yellow-400 font-medium">HOME</Link>
