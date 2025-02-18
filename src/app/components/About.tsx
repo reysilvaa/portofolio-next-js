@@ -2,10 +2,9 @@
 // components/About.tsx
 import Image from 'next/image';
 import { JSX } from 'react';
-
 export default function About(): JSX.Element {
   return (
-    <div className="mb-24">
+    <div className="mb-24" id="about">
       <div className="flex flex-col md:flex-row">
         <div className="md:w-1/3 mb-12 md:mb-0">
           <div className="border-4 border-yellow-400 p-2">
@@ -35,13 +34,6 @@ export default function About(): JSX.Element {
             Tidak hanya itu, saya pernah mempelajari Odoo ERP dan aktif menggunakan Git serta GitHub dalam pengembangan proyek. 
             Saya selalu antusias untuk mempelajari teknologi baru dan berkomitmen untuk menciptakan solusi yang efisien dan elegan.
           </p>
-
-
-
-          {/* <p className="text-gray-600 mb-4">
-            Saya memiliki keahlian dalam membangun aplikasi web dan mobile menggunakan teknologi terkini.
-          </p> */}
-          {/* Additional content goes here */}
         </div>
       </div>
     </div>

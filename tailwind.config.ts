@@ -8,6 +8,7 @@ export default {
   ],
   theme: {
     extend: {
+      scrollBehavior: ['smooth'],
       colors: {
         yellow: {
           400: '#FFD200',

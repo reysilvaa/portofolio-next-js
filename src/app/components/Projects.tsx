@@ -18,7 +18,7 @@ interface ProjectsProps {
 export default function Projects({ projects }: ProjectsProps): JSX.Element {
   return (
     <section className="mb-24" id="projects">
-      <h2 className="text-3xl font-bold mb-10 after:content-[''] after:block after:w-20 after:h-1 after:bg-yellow-400 after:mt-4"></h2>
+      <h2 className="text-3xl font-bold mb-10 after:content-[''] after:block after:w-20 after:h-1 after:bg-yellow-400 after:mt-4">Projek</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project) => (
           <div key={project.id} className="group">
