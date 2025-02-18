@@ -10,7 +10,7 @@ export default function About(): JSX.Element {
         <div className="md:w-1/3 mb-12 md:mb-0">
           <div className="border-4 border-yellow-400 p-2">
             <Image
-              src="/about-picture.jpg"
+              src="/image/me.png"
               alt="About Reynald Silva"
               width={300}
               height={400}

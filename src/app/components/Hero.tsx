@@ -22,11 +22,11 @@ export default function Hero(): JSX.Element {
         <SocialLinks />
       </div>
       <div className="md:w-1/2 relative">
-        <div className="w-80 h-80 bg-yellow-400 rounded-full absolute -z-10"></div>
+        <div className="w-80 h-70 bg-yellow-400 rounded-full absolute -z-10"></div>
         <Image
-          src="/profile-picture.png"
-          alt="Moch. Reynald Silva Baktiar"
-          width={400}
+              src="/image/me.png"
+              alt="Moch. Reynald Silva Baktiar"
+          width={500}
           height={500}
           className="relative z-10"
         />
