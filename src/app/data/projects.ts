@@ -24,7 +24,7 @@ const projects = [
     id: 4,
     title: "SiTatib",
     category: "Proyek Akhir Semester 3",
-    imageUrl: "/image/projects/noimage.png",
+    imageUrl: "/image/projects/php.png",
     link: "https://github.com/reysilvaa/SiTatibJTI"
   },
   {
