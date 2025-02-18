@@ -36,8 +36,8 @@ export default function Testimonials({ testimonials }: TestimonialsProps): JSX.E
                 <p className="text-gray-600 text-sm">{testimonial.position}</p>
               </div>
             </div>
-            <p className="text-gray-700 italic">"{testimonial.text}"</p>
-          </div>
+                <p className="text-gray-700 italic">&quot;{testimonial.text}&quot;</p>
+            </div>
         ))}
       </div>
     </section>

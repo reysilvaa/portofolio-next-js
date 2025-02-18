@@ -9,7 +9,7 @@ export default function Hero(): JSX.Element {
     <div className="flex flex-col md:flex-row justify-between items-center mb-24">
       <div className="md:w-1/2 mb-12 md:mb-0">
         <p className="text-yellow-400 font-semibold mb-4">Selamat Datang !</p>
-        <h1 className="text-5xl font-bold mb-6">I'am Moch Reynald Silva Baktiar</h1>
+        <h1 className="text-5xl font-bold mb-6">I&apos;am Moch Reynald Silva Baktiar</h1>
         <p className="text-gray-600 mb-8">
             Aku ganteng dan aku programmer. Aku percaya bahwa ketampanan dan logika bisa berjalan seiringan. 
             Dengan ketampanan ini, semoga bug segan mendekat dan kode tetap elegan. 

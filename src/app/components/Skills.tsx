@@ -19,31 +19,26 @@ export default function Skills({ skillCategories }: SkillsProps): JSX.Element {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const skillBars = document.querySelectorAll('.skill-bar-fill');
-            skillBars.forEach((bar, index) => {
-              setTimeout(() => {
-                (bar as HTMLElement).style.width = (bar as HTMLElement).dataset.level || '0%';
-                (bar as HTMLElement).style.opacity = '1';
-              }, 100 * index);
-            });
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
+    const section = sectionRef.current;
+  
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const skillBars = document.querySelectorAll('.skill-bar-fill');
+          skillBars.forEach((bar, index) => {
+            setTimeout(() => {
+              (bar as HTMLElement).style.width = (bar as HTMLElement).dataset.level || '0%';
+              (bar as HTMLElement).style.opacity = '1';
+            }, 100 * index);
+          });
+        }
+      });
+    }, { threshold: 0.1 });
+  
+    if (section) observer.observe(section);
+  
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
+      if (section) observer.unobserve(section);
     };
   }, []);
 
