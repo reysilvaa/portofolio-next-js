@@ -29,10 +29,31 @@ const projects = [
   },
   {
     id: 5,
-    title: "Web Laudry Management",
+    title: "Web Laundry Management",
     category: "UKL / Tugas Akhir SMK",
-    imageUrl: "/image/projects/noimage.png",
+    imageUrl: "/image/projects/node.png",
     link: "https://github.com/reysilvaa/NODE_REACT--Laundry--UKK"
+  },
+  {
+    id: 6,
+    title: "Odoo ERP Hospital Management",
+    category: "Magang (PKL) PT Cendana2000",
+    imageUrl: "/image/projects/odoo.png",
+    link: "https://github.com/reysilvaa/Odoo14-Hospital"
+  },
+  {
+    id: 7,
+    title: "Odoo ERP Rapot Management",
+    category: "Magang (PKL) PT Cendana2000",
+    imageUrl: "/image/projects/odoo.png",
+    link: "https://github.com/reysilvaa/Odoo14-Rapot"
+  },
+  {
+    id: 8,
+    title: "Odoo ERP Perpustakaan Management",
+    category: "Magang (PKL) PT Cendana2000",
+    imageUrl: "/image/projects/odoo.png",
+    link: "https://github.com/reysilvaa/Odoo14-Perpustakaan"
   },
 ];
 
