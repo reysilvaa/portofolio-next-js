@@ -1,4 +1,3 @@
-
 // components/Hero.tsx
 import Image from 'next/image';
 import SocialLinks from './SocialLinks';
@@ -6,7 +5,7 @@ import { JSX } from 'react';
 
 export default function Hero(): JSX.Element {
   return (
-    <div className="flex flex-col md:flex-row justify-between items-center mb-24">
+    <div className="flex flex-col md:flex-row justify-between items-center mb-50 mt-16">
       <div className="md:w-1/2 mb-12 md:mb-0">
         <p className="text-yellow-400 font-semibold mb-4">Selamat Datang !</p>
         <h1 className="text-5xl font-bold mb-6">I&apos;am Moch Reynald Silva Baktiar</h1>
@@ -22,15 +21,15 @@ export default function Hero(): JSX.Element {
         <SocialLinks />
       </div>
       <div className="md:w-1/2 relative">
-        <div className="relative z-10 -mt-10 md:-mt-14 lg:-mt-20"></div>
+        <div className="relative z-10"></div>
         <Image
             src="/image/me.png"
             alt="Moch. Reynald Silva Baktiar"
             width={500}
             height={500}
-            className="relative z-10 -mt-10"
-            />
-        </div>
+            className="relative z-10 mt-10 md:mt-14 lg:mt-20"
+        />
+      </div>
     </div>
   );
 }

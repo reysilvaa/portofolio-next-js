@@ -1,12 +1,12 @@
-
 // components/About.tsx
 import Image from 'next/image';
 import { JSX } from 'react';
+
 export default function About(): JSX.Element {
   return (
-    <div className="mb-24" id="about">
+    <div className="mb-24 mt-16" id="about">
       <div className="flex flex-col md:flex-row">
-        <div className="md:w-1/3 mb-12 md:mb-0">
+        <div className="md:w-1/3 mb-12 md:mb-0 mt-7">
           <div className="border-4 border-yellow-400 p-2">
             <Image
               src="/image/me.png"
@@ -17,8 +17,8 @@ export default function About(): JSX.Element {
             />
           </div>
         </div>
-        <div className="md:w-2/3 md:pl-16">
-          <h2 className="text-4xl font-bold mb-8">Halo, Saya Reynald Silva</h2>
+        <div className="md:w-2/3 md:pl-32">
+          <h2 className="text-4xl font-bold mb-8">Tentang Saya</h2>
           <p className="text-gray-600 mb-4 leading-relaxed">
             Saya adalah seorang full-stack developer yang memulai perjalanan di dunia pemrograman sejak 2018. 
             Saat ini, saya sedang menempuh pendidikan di Politeknik Negeri Malang. 

@@ -25,7 +25,7 @@ export default function Navbar(): JSX.Element {
 
   return (
     <nav 
-      className={`fixed top-0 left-0 w-full flex justify-between items-center bg-white z-50 px-6 py-4 transition-transform duration-300 ${
+      className={`fixed top-0 left-0 w-full flex justify-between items-center z-50 px-8 py-10 transition-transform duration-300 ${
         isVisible ? 'transform translate-y-0' : 'transform -translate-y-full'
       }`}
     >
