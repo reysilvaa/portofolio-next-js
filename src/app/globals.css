@@ -24,3 +24,273 @@ h1, h2, h3, h4, h5, h6 {
 html {
   scroll-behavior: smooth;
 }
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-blink {
+  animation: blink 0.7s infinite;
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s forwards;
+}
+
+.typing-text {
+  display: inline-block;
+}
+
+/* Crayon effect styles */
+.crayon-overlay {
+  position: absolute;
+  inset: 0;
+  background: 
+    /* Main yellow crayon coloring with a textured pattern */
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 214, 0, 0.15),
+      rgba(255, 214, 0, 0.25) 2px,
+      rgba(255, 214, 0, 0.15) 3px,
+      rgba(255, 214, 0, 0.2) 4px
+    ),
+    /* Lighter yellow random strokes */
+    radial-gradient(
+      circle at 30% 40%,
+      rgba(255, 230, 0, 0.3) 10%,
+      transparent 50%
+    ),
+    /* Darker yellow strokes */
+    radial-gradient(
+      circle at 70% 60%,
+      rgba(255, 200, 0, 0.4) 10%,
+      transparent 60%
+    );
+  mix-blend-mode: color-dodge;
+  opacity: 0;
+  pointer-events: none; /* Let mouse events pass through */
+}
+
+/* Crayon drawing animation */
+@keyframes crayonDraw {
+  0% {
+    opacity: 0;
+    background-position: 0 0, 0 0, 0 0;
+    background-size: 10px 10px, 100px 100px, 150px 150px;
+  }
+  30% {
+    opacity: 0.3;
+    background-position: 5px 5px, 30px 30px, 60px 60px;
+  }
+  70% {
+    opacity: 0.7;
+    background-position: 10px 10px, 70px 70px, 120px 120px;
+  }
+  100% {
+    opacity: 0.5;
+    background-position: 0 0, 100px 100px, 200px 200px;
+    background-size: 8px 8px, 200px 200px, 250px 250px;
+  }
+}
+
+.animate-crayon-draw {
+  animation: crayonDraw 1.8s forwards 0.5s;
+}
+
+/* Keep your existing animation keyframes here */
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes expandLine {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 60px;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.3;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 0.2;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatReverse {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.3;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 0.2;
+    transform: translateY(0);
+  }
+}
+
+/* Animation classes */
+.animate-slide-in-left {
+  animation: slideInLeft 0.8s forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.8s forwards;
+}
+
+.animate-expand-line {
+  animation: expandLine 0.8s forwards 0.3s;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s forwards;
+}
+
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: floatReverse 7s ease-in-out infinite;
+}
+
+/* Animation keyframes for Projects section */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes expandLine {
+  from {
+    width: 0;
+  }
+  to {
+    width: 80px;
+  }
+}
+
+@keyframes cardAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.9);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes scaleFade {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+}
+
+/* Animation classes */
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-expand-line {
+  animation: expandLine 0.8s ease-out forwards;
+}
+
+.animate-card-appear {
+  animation: cardAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-scale-fade {
+  animation: scaleFade 1.2s ease-out forwards;
+}

@@ -20,6 +20,20 @@ const projects = [
     imageUrl: "/image/projects/mobilerosanti.png",
     link: "https://github.com/reysilvaa/rosantibike_mobile"
   },
+  {
+    id: 4,
+    title: "SiTatib",
+    category: "Proyek Akhir Semester 3",
+    imageUrl: "/image/projects/noimage.png",
+    link: "https://github.com/reysilvaa/SiTatibJTI"
+  },
+  {
+    id: 5,
+    title: "Web Laudry Management",
+    category: "UKL / Tugas Akhir SMK",
+    imageUrl: "/image/projects/noimage.png",
+    link: "https://github.com/reysilvaa/NODE_REACT--Laundry--UKK"
+  },
 ];
 
 export default projects;
