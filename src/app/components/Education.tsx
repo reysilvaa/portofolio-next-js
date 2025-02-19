@@ -87,7 +87,7 @@ export default function Education({ educationList }: EducationProps): JSX.Elemen
 
   return (
     <section className="mb-24" id="education">
-      <h2 className="text-3xl font-bold mb-10 after:content-[''] after:block after:w-20 after:h-1 after:bg-yellow-400 after:mt-4">Education</h2>
+      <h2 className="text-3xl font-bold mb-10 after:content-[''] after:block after:w-20 after:h-1 after:bg-yellow-400 after:mt-4">Pendidikan</h2>
       <div className="relative">
         <div className="absolute left-0 md:left-1/4 w-1 h-full bg-gray-200 transform -translate-x-1/2"></div>
         

@@ -26,7 +26,7 @@ export default function Home(): JSX.Element {
         <Navbar />
         <Hero />
         <About />
-        <Services services={services} />
+        {/* <Services services={services} /> */}
         <Skills skillCategories={skillCategories} />
         <WorkExperience experiences={experiences} />
         <Education educationList={educationList} />
