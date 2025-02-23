@@ -6,7 +6,7 @@ import { JSX } from 'react';
 
 export const metadata: Metadata = {
   title: 'Reynald Portfolio',
-  description: 'Reynald Portfolio Website',
+  description: 'Reynald Web Portfolio',
 }
 
 export default function RootLayout({
@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode
 }): JSX.Element {
   return (
-    <html lang="en">
+    <html lang="id">
       <body>{children}</body>
     </html>
   )

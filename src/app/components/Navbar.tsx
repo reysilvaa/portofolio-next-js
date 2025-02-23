@@ -2,6 +2,17 @@
 import Link from 'next/link';
 import { JSX, useState, useEffect } from 'react';
 
+const downloadResume = async () => {
+  const response = await fetch("/");
+  const blob = await response.blob();
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "CV_Moch. Reynald Silva Baktiar.pdf"; // Nama file yang benar
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
+
 export default function Navbar(): JSX.Element {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -42,12 +53,14 @@ export default function Navbar(): JSX.Element {
     >
       <Link href="/" className="text-3xl font-bold text-yellow-400">Rey.</Link>
       <div className="hidden md:flex space-x-8">
-        <Link href="/" className={`${activeSection === "home" ? "text-yellow-400" : "hover:text-yellow-400"} font-medium`}>HOME</Link>
+        <Link href="/" className={`${activeSection === "hero" ? "text-yellow-400" : "hover:text-yellow-400"} font-medium`}>HOME</Link>
         <Link href="/#about" className={`${activeSection === "about" ? "text-yellow-400" : "hover:text-yellow-400"} font-medium`}>TENTANG</Link>
         <Link href="/#experience" className={`${activeSection === "experience" ? "text-yellow-400" : "hover:text-yellow-400"} font-medium`}>PENGALAMAN</Link>
-        <Link href="/resume" className={`${activeSection === "resume" ? "text-yellow-400" : "hover:text-yellow-400"} font-medium`}>CV SAYA</Link>
-        <Link href="/blog" className={`${activeSection === "blog" ? "text-yellow-400" : "hover:text-yellow-400"} font-medium`}>BLOG</Link>
-        <Link href="/#contact" className={`${activeSection === "contact" ? "text-yellow-400" : "hover:text-yellow-400"} font-medium`}>KONTAK</Link>
+        <Link href="/#education" className={`${activeSection === "education" ? "text-yellow-400" : "hover:text-yellow-400"} font-medium`}>PENDIDIKAN</Link>
+        <Link href="#" onClick={downloadResume} className={`${activeSection === "#" ? "text-yellow-400" : "hover:text-yellow-400"} font-medium`}>
+          CV SAYA
+        </Link>
+        <Link href="/#kontak" className={`${activeSection === "kontak" ? "text-yellow-400" : "hover:text-yellow-400"} font-medium`}>KONTAK</Link>
       </div>
     </nav>
   );

@@ -31,7 +31,7 @@ export default function About(): JSX.Element {
   }, []);
 
   return (
-    <div 
+    <section 
       className="mb-24 mt-16 relative overflow-hidden" 
       id="about" 
       ref={sectionRef}
@@ -108,6 +108,6 @@ export default function About(): JSX.Element {
           </p>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

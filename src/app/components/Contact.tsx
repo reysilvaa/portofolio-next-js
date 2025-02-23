@@ -3,7 +3,7 @@ import React, { JSX } from 'react';
 
 export default function Contact(): JSX.Element {
   return (
-    <section className="mb-24" id="contact">
+    <section className="mb-24" id="kontak">
       <h2 className="text-3xl font-bold mb-10 after:content-[''] after:block after:w-20 after:h-1 after:bg-yellow-400 after:mt-4">Kontak</h2>
       
       <div className="flex flex-col lg:flex-row gap-10">
