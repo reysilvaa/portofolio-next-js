@@ -14,6 +14,10 @@ export const sendToTelegram = async (message: string) => {
   try {
     await axios.post(url, params);
   } catch (error) {
-    await axios.post(url, "Terjadi Kesalahan : "+error);
+    await axios.post(url, {
+        chat_id: CHAT_ID,
+        text: `Terjadi Kesalahan: ${error}`,
+        parse_mode: 'Markdown',
+      });
   }
 };
