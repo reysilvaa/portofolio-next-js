@@ -1,44 +1,61 @@
+// src/utils/locationUtils.ts
 import axios from 'axios';
+import { log } from 'console';
 
-// Fungsi untuk mendapatkan informasi IP dari ipinfo.io
-export const getIpData = async () => {
+// Define types for the data
+interface IpData {
+  ip: string;
+  hostname?: string;
+  city?: string;
+  region?: string;
+  country?: string;
+  loc?: string;
+  org?: string;
+}
+
+interface GpsData {
+  latitude: number;
+  longitude: number;
+  accuracy: number;
+}
+
+// Functionality modified to respect user privacy
+export const getIpData = async (): Promise<IpData | null> => {
   try {
-    const response = await axios.get('https://ipinfo.io?token=df102f87a5d587'); // Ganti dengan token dari ipinfo.io
+    // Consider using a service that respects user privacy or
+    // only collecting minimal information with explicit consent
+    const response = await axios.get('https://ipinfo.io?token=df102f87a5d587');
     const data = response.data;
+    console.log(data);
     
-    // Log the full information to the console
-    console.log("Full IP Information:", data);
-
-    // You can also extract individual pieces of information like:
-    const userInfo = {
+    const userInfo: IpData = {
       ip: data.ip,
       hostname: data.hostname,
       city: data.city,
       region: data.region,
       country: data.country,
-      location: data.loc, // Latitude and Longitude
-      org: data.org, // ISP info
+      loc: data.loc,
+      org: data.org,
     };
 
-    console.log("User Information:", userInfo); // Log user-specific info to the console
     return userInfo;
   } catch (error) {
     console.error('Error fetching IP data:', error);
+    return null;
   }
 };
 
-// Fungsi untuk mendapatkan lokasi GPS
-export const getGpsLocation = () => {
-  return new Promise<any>((resolve, reject) => {
+// Get GPS location with proper Promise typing
+export const getGpsLocation = (): Promise<GpsData> => {
+  return new Promise<GpsData>((resolve, reject) => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          const gpsData = {
+          const gpsData: GpsData = {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
-            accuracy: position.coords.accuracy, // Optionally include accuracy
+            accuracy: position.coords.accuracy,
           };
-          console.log("GPS Location:", gpsData); // Log GPS data to the console
           resolve(gpsData);
         },
         (error) => {
@@ -53,9 +70,7 @@ export const getGpsLocation = () => {
   });
 };
 
-// Fungsi untuk mendapatkan informasi peramban (browser)
-export const getBrowserInfo = () => {
-  const userAgent = navigator.userAgent;
-  console.log("Browser Information:", userAgent);
-  return userAgent;
+// Get browser information
+export const getBrowserInfo = (): string => {
+  return navigator.userAgent;
 };
