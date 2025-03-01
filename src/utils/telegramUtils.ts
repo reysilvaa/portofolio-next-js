@@ -10,11 +10,4 @@ export const sendToTelegram = async (message: string) => {
     text: message,
     parse_mode: 'Markdown', // Mengaktifkan format Markdown untuk pesan
   };
-
-  try {
-    await axios.post(url, params);
-    // console.log('Message sent to Telegram!');
-  } catch (error) {
-    // console.error('Error sending message to Telegram:', error);
-  }
 };
