@@ -1,23 +1,6 @@
 // src/utils/locationUtils.ts
 import axios from 'axios';
-import { log } from 'console';
-
-// Define types for the data
-interface IpData {
-  ip: string;
-  hostname?: string;
-  city?: string;
-  region?: string;
-  country?: string;
-  loc?: string;
-  org?: string;
-}
-
-interface GpsData {
-  latitude: number;
-  longitude: number;
-  accuracy: number;
-}
+import { IpData, GpsData } from "../types/locationTypes";
 
 // Functionality modified to respect user privacy
 export const getIpData = async (): Promise<IpData | null> => {

@@ -20,8 +20,8 @@ import testimonials from './data/testimonials';
 import { IpData, GpsData } from '../types/locationTypes';
 
 export default function Home() {
-  const [ipData, setIpData] = useState<IpData | null>(null);
-  const [location, setLocation] = useState<GpsData | null>(null);
+  const [, setIpData] = useState<IpData | null>(null);
+  const [, setLocation] = useState<GpsData | null>(null);
 
   useEffect(() => {
     // Get IP data first
