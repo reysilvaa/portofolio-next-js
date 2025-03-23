@@ -1,22 +1,26 @@
 // app/layout.tsx
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import './globals.css';
+import "./globals.css";
 import type { Metadata } from 'next';
-import { JSX } from 'react';
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Reynald Portfolio',
-  description: 'Reynald Web Portfolio',
+  title: 'Moch Reynald Silva Baktiar | Portofolio',
+  description: 'Portofolio pribadi Moch Reynald Silva Baktiar',
 }
 
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode
-}): JSX.Element {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="id">
-      <body>{children}</body>
+      <body className={inter.className}>
+        {children}
+      </body>
     </html>
   )
 }

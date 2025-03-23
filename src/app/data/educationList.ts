@@ -1,9 +1,10 @@
 const educationList = [
     {
       id: 1,
+      period: "2021 - Sekarang",
       degree: "D-IV Teknik Informatika",
+      major: "Teknologi Informasi",
       institution: "Politeknik Negeri Malang",
-      duration: "2021 - Sekarang",
       description: [
         "Mempelajari dasar Pemrograman Java dan Konsep OOP",
         "Mendapatkan Pengalaman Critical Thinking and Problem Solving",
@@ -24,19 +25,22 @@ const educationList = [
         "Mempelajari Analisis Bisnis Menggunakan Software PowerBI, Pentaho dan semacamnya",
         "Mempelajari Manajemen Proyek untuk perencanaan Pengembangan Perangkat Lunak",
         "Mempelajari Metode Pengembangan Perangkat Lunak (Agile, Waterfall, dll)",
-        "Mempelajari Analisa Desain Berbasis Objek untuk memetakan spesifikasi dan rancangan suatu sistem secara objek",
-      ]    
+        "Mempelajari Analisa Desain Berbasis Objek untuk memetakan spesifikasi dan rancangan suatu sistem secara objek"
+      ],
+      skills: ["Web Development", "Mobile Apps", "Database", "Machine Learning", "UI/UX Design"]
     },
     {
       id: 2,
+      period: "2018 - 2021",
       degree: "Rekayasa Perangkat Lunak",
+      major: "Teknologi Informasi",
       institution: "SMK Telkom Malang",
-      duration: "2018 - 2021",
       description: [
         "Mempelajari Framework React and Node.js dan Pengalaman membuat Web Laundry",
         "Mempelajari Bahasa Pemrograman PHP, HTML/CSS, Javascript",
         "Mendapatkan Pengalaman Bekerja secara Tim dalam Tugas Akhir (UKL)"
-      ]
+      ],
+      skills: ["PHP", "JavaScript", "HTML/CSS", "React", "Node.js"]
     }
   ];
   

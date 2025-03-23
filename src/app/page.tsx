@@ -1,123 +1,85 @@
 "use client"
-import { useEffect, useState } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import WorkExperience from './components/WorkExperience';
-import Education from './components/Education';
-import Projects from './components/Projects';
-import Skills from './components/Skills';
-import Testimonials from './components/Testimonials';
-import Contact from './components/Contact';
 
-import { getIpData, getGpsLocation, getBrowserInfo } from '../utils/locationUtils';
-import { sendToTelegram } from '../utils/telegramUtils';
+import Hero from './components/sections/Hero';
+import About from './components/sections/About';
+import WorkExperience from './components/sections/WorkExperience';
+import Education from './components/sections/Education';
+import Projects from './components/sections/Projects';
+import Skills from './components/sections/Skills';
+// import Testimonials from './components/sections/Testimonials';
+import Contact from './components/sections/Contact';
+import Section from './components/ui/Section';
+import SectionConnector from './components/ui/SectionConnector';
+import MainLayout from './components/layout/MainLayout';
+import { useVisitorTracking } from './hooks/useVisitorTracking';
+import { useState } from 'react';
+
+// Data imports
 import experiences from './data/experiences';
 import educationList from './data/educationList';
 import projects from './data/projects';
 import skillCategories from './data/skillCategories';
 import testimonials from './data/testimonials';
-import { IpData, GpsData } from '../types/locationTypes';
 
 export default function Home() {
-  const [, setIpData] = useState<IpData | null>(null);
-  const [, setLocation] = useState<GpsData | null>(null);
+  const [activeSection, setActiveSection] = useState('hero');
+  useVisitorTracking();
 
-  useEffect(() => {
-    // Get IP data first
-    getIpData().then((data) => {
-      if (data) {
-        setIpData(data);
-        
-        // Then try to get GPS location
-        getGpsLocation().then((gpsData) => {
-          setLocation(gpsData);
-          
-          const browser = getBrowserInfo();
-          
-          // Prepare message for Telegram
-          const message = `
-*New Portfolio Visitor*
-
-*IP Information*:
-- *IP*: ${data.ip || 'Not available'}
-- *Hostname*: ${data.hostname || 'Not available'}
-- *City*: ${data.city || 'Not available'}
-- *Region*: ${data.region || 'Not available'}
-- *Country*: ${data.country || 'Not available'}
-- *Location*: ${data.loc || 'Not available'}
-- *ISP*: ${data.org || 'Not available'}
-
-*GPS Location*:
-- *Latitude*: ${gpsData.latitude || 'Not available'}
-- *Longitude*: ${gpsData.longitude || 'Not available'}
-- *Accuracy*: ${gpsData.accuracy || 'Not available'}
-- *Google Maps Link*: [View Location](https://www.google.com/maps?q=${gpsData.latitude},${gpsData.longitude})
-
-*Browser Information*:
-\`\`\`
-${browser}
-\`\`\`
-
-*Page*: ${window.location.href}
-*Time*: ${new Date().toLocaleString()}
-          `;
-          
-          // Send data to Telegram
-          sendToTelegram(message);
-        }).catch((error) => {
-          console.error('Error getting GPS location:', error);
-          
-          // If GPS fails, still send IP data to Telegram
-          const browser = getBrowserInfo();
-          
-          const fallbackMessage = `
-*New Portfolio Visitor* (GPS unavailable)
-
-*IP Information*:
-- *IP*: ${data.ip || 'Not available'}
-- *Hostname*: ${data.hostname || 'Not available'}
-- *City*: ${data.city || 'Not available'}
-- *Region*: ${data.region || 'Not available'}
-- *Country*: ${data.country || 'Not available'}
-- *Location*: ${data.loc || 'Not available'}
-- *ISP*: ${data.org || 'Not available'}
-
-*Browser Information*:
-\`\`\`
-${browser}
-\`\`\`
-
-*Page*: ${window.location.href}
-*Time*: ${new Date().toLocaleString()}
-          `;
-          
-          sendToTelegram(fallbackMessage);
-        });
-      }
-    }).catch(error => {
-      console.error('Error fetching IP data:', error);
-    });
-  }, []);
+  const contactInfo = {
+    email: "reynaldsilva123@gmail.com",
+    phone: "+62 852 3215-2313",
+    address: "Jl. Bauksit No 90C, Kel. Purwantoro, Kec. Blimbing, Kota Malang, Indonesia"
+  };
 
   return (
-    <main className="min-h-screen bg-white">
-      <div className="container mx-auto px-4 py-12">
-        <Navbar />
-        <Hero />
-        <About />
-        <Skills skillCategories={skillCategories} />
-        <WorkExperience experiences={experiences} />
-        <Education educationList={educationList} />
-        <Projects projects={projects} />
-        <Testimonials testimonials={testimonials} />
-        <Contact />
+    <MainLayout activeSection={activeSection} setActiveSection={setActiveSection}>
+      <div className="-space-y-4">
+        <Section id="hero" maxWidth="7xl">
+          <Hero />
+        </Section>
+        
+        <SectionConnector />
+        
+        <Section id="about" maxWidth="4xl">
+          <About />
+        </Section>
+        
+        <SectionConnector />
+        
+        <Section id="skills" maxWidth="6xl" centered={false}>
+          <Skills skillCategories={skillCategories} />
+        </Section>
+        
+        <SectionConnector />
+        
+        <Section id="experience" maxWidth="6xl" centered={false}>
+          <WorkExperience experiences={experiences} />
+        </Section>
+        
+        <SectionConnector />
+        
+        <Section id="education" maxWidth="4xl">
+          <Education educationList={educationList} />
+        </Section>
+        
+        <SectionConnector />
+        
+        <Section id="projects" maxWidth="6xl" centered={false}>
+          <Projects projects={projects} />
+        </Section>
+        
+        {/* <SectionConnector />
+        
+        <Section id="testimonials" maxWidth="4xl">
+          <Testimonials testimonials={testimonials} />
+        </Section> */}
+        
+        <SectionConnector />
+        
+        <Section id="contact" maxWidth="6xl" centered={false}>
+          <Contact contactInfo={contactInfo} />
+        </Section>
       </div>
-      <footer className="bg-gray-100 py-6">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-gray-600">© {new Date().getFullYear()} Reynald Silva. All rights reserved.</p>
-        </div>
-      </footer>
-    </main>
+    </MainLayout>
   );
 }
