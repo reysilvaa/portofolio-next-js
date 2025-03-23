@@ -1,7 +1,6 @@
 "use client";
 import React, { JSX, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, ChevronUp } from 'lucide-react';
 
 type EducationItem = {
   id: number;
@@ -16,7 +15,6 @@ interface EducationProps {
 }
 
 export default function Education({ educationList }: EducationProps): JSX.Element {
-  const [activeId, setActiveId] = useState<number | null>(null);
   const [expandedIds, setExpandedIds] = useState<number[]>([]);
 
   const toggleExpand = (id: number) => {
@@ -40,7 +38,7 @@ export default function Education({ educationList }: EducationProps): JSX.Elemen
       <>
         <AnimatePresence mode="wait">
           <motion.ul 
-            className="list-disc list-inside ml-5 text-gray-600 space-y-2 overflow-y-hidden"
+            className="list-none space-y-3 font-scrapbook text-cowboy-leather dark:text-cowboy-sand"
             initial={{ opacity: 0, minHeight: 0 }}
             animate={{ opacity: 1, minHeight: 'auto' }}
             exit={{ opacity: 0, minHeight: 0 }}
@@ -54,8 +52,10 @@ export default function Education({ educationList }: EducationProps): JSX.Elemen
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 10 }}
                 transition={{ duration: 0.3, delay: 0.05 * i }}
+                className="flex items-start"
               >
-                {point}
+                <span className="inline-block mt-1.5 mr-2 w-3 h-3 bg-cowboy-leather/20 dark:bg-cowboy-gold/20 clip-path-star"></span>
+                <span>{point}</span>
               </motion.li>
             ))}
           </motion.ul>
@@ -64,19 +64,19 @@ export default function Education({ educationList }: EducationProps): JSX.Elemen
         {hiddenCount > 0 && (
           <motion.button
             onClick={() => toggleExpand(id)}
-            className="mt-3 flex items-center text-yellow-500 hover:text-yellow-700 font-medium"
+            className="mt-4 flex items-center text-cowboy-rust dark:text-cowboy-gold font-western text-sm tracking-wide"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             {isExpanded ? (
               <>
-                <ChevronUp className="w-4 h-4 mr-1" />
-                Sembunyikan {hiddenCount} item lainnya
+                <span className="inline-block w-4 h-4 mr-2 transform rotate-180">▼</span>
+                SEMBUNYIKAN {hiddenCount} ITEM
               </>
             ) : (
               <>
-                <ChevronDown className="w-4 h-4 mr-1" />
-                Tampilkan {hiddenCount} item lainnya
+                <span className="inline-block w-4 h-4 mr-2">▼</span>
+                TAMPILKAN {hiddenCount} ITEM
               </>
             )}
           </motion.button>
@@ -86,65 +86,98 @@ export default function Education({ educationList }: EducationProps): JSX.Elemen
   };
 
   return (
-    <section className="mb-24" id="education">
-      <h2 className="text-3xl font-bold mb-10 after:content-[''] after:block after:w-20 after:h-1 after:bg-yellow-400 after:mt-4">Pendidikan</h2>
-      <div className="relative">
-        <div className="absolute left-0 md:left-1/4 w-1 h-full bg-gray-200 transform -translate-x-1/2"></div>
-        
-        <div className="space-y-16">
+    <div className="relative">
+      {/* Background peta kuno */}
+      <div className="absolute inset-0 opacity-5 pointer-events-none">
+        <div className="w-full h-full bg-repeat"
+             style={{ 
+               backgroundImage: "url('/textures/old-map.jpg')",
+               backgroundSize: "600px"
+             }}>
+        </div>
+      </div>
+      
+      {/* Container utama */}
+      <div className="relative z-10">
+        <div className="grid grid-cols-1 gap-8">
           {educationList.map((edu, index) => (
             <motion.div 
               key={edu.id} 
-              className="relative flex flex-col md:flex-row"
+              className="relative"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              onMouseEnter={() => setActiveId(edu.id)}
-              onMouseLeave={() => setActiveId(null)}
             >
-              {/* Timeline node */}
-              <motion.div 
-                className="absolute left-0 md:left-1/4 w-5 h-5 rounded-full bg-yellow-400 border-4 border-white shadow-lg transform -translate-x-1/2"
-                animate={{ 
-                  scale: activeId === edu.id ? 1.5 : 1,
-                  backgroundColor: activeId === edu.id ? '#FBBF24' : '#FBBF24'
-                }}
-                transition={{ duration: 0.3 }}
-              />
-
-              {/* Content */}
-              <div className="md:w-1/4 pl-8 md:pl-0 md:pr-16 mb-4 md:mb-0 md:text-right">
-                <motion.h3 
-                  className="text-xl font-semibold text-gray-800"
-                  animate={{ color: activeId === edu.id ? '#FBBF24' : '#1F2937' }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {edu.degree}
-                </motion.h3>
-                <p className="text-yellow-400 font-medium">{edu.institution}</p>
-                <p className="text-gray-500">{edu.duration}</p>
+              {/* Education card with scroll styling */}
+              <div className={`bg-cowboy-parchment dark:bg-cowboy-wood border-4 border-cowboy-leather dark:border-cowboy-gold
+                            p-5 relative overflow-hidden transform ${index % 2 === 0 ? 'rotate-1' : '-rotate-1'}`}>
+                
+                {/* Decorative scrolls at top and bottom of the card */}
+                <div className="absolute top-0 left-0 right-0 h-6 bg-cowboy-leather dark:bg-cowboy-gold rounded-b-md transform translate-y-1">
+                  <div className="absolute left-1/4 bottom-0 w-1/2 h-2 bg-cowboy-parchment dark:bg-cowboy-wood"></div>
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 h-6 bg-cowboy-leather dark:bg-cowboy-gold rounded-t-md transform -translate-y-1">
+                  <div className="absolute left-1/4 top-0 w-1/2 h-2 bg-cowboy-parchment dark:bg-cowboy-wood"></div>
+                </div>
+                
+                {/* Education Content */}
+                <div className="py-6 px-2">
+                  <div className="flex flex-col md:flex-row items-start gap-6">
+                    {/* Institution badge/seal */}
+                    <div className="md:w-1/4 flex flex-col items-center">
+                      <div className="w-24 h-24 rounded-full bg-cowboy-leather dark:bg-cowboy-gold flex items-center justify-center relative mb-3">
+                        <div className="sheriff-badge absolute inset-0 opacity-50"></div>
+                        <span className="font-western text-cowboy-parchment dark:text-cowboy-wood text-2xl">
+                          {edu.institution.split(' ').map(word => word[0]).join('')}
+                        </span>
+                      </div>
+                      
+                      <div className="text-center">
+                        <h3 className="font-western text-xl text-cowboy-leather dark:text-cowboy-gold tracking-wide">
+                          {edu.degree}
+                        </h3>
+                        <p className="font-scrapbook text-cowboy-rust dark:text-cowboy-sand italic mt-1">
+                          {edu.institution}
+                        </p>
+                        <p className="font-scrapbook text-sm text-cowboy-leather/70 dark:text-cowboy-gold/70 mt-1">
+                          {edu.duration}
+                        </p>
+                      </div>
+                    </div>
+                    
+                    {/* Description */}
+                    <div className="md:w-3/4 mt-4 md:mt-0">
+                      <div className="flex items-center mb-4">
+                        <span className="font-western text-lg text-cowboy-leather dark:text-cowboy-gold mr-3">PENCAPAIAN</span>
+                        <div className="flex-grow h-px bg-cowboy-leather/30 dark:bg-cowboy-gold/30"></div>
+                      </div>
+                      {renderDescription(edu.description, edu.id)}
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Decorative elements */}
+                {index % 3 === 0 && (
+                  <div className="absolute top-3 right-3 bullet-holes bullet-hole-1"></div>
+                )}
+                {index % 3 === 1 && (
+                  <div className="absolute bottom-10 left-5 bullet-holes bullet-hole-2"></div>
+                )}
               </div>
               
-              <motion.div 
-                className="md:w-3/4 pl-8 md:pl-16 pt-2"
-                whileHover={{ x: 5 }}
-                transition={{ duration: 0.2 }}
-              >
-                <motion.div 
-                  className="p-6 bg-white rounded-lg shadow-md"
-                  animate={{ 
-                    boxShadow: activeId === edu.id ? '0 10px 25px -5px rgba(251, 191, 36, 0.3)' : '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
-                  }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {renderDescription(edu.description, edu.id)}
-                </motion.div>
-              </motion.div>
+              {/* Connector between cards */}
+              {index < educationList.length - 1 && (
+                <div className="flex justify-center my-4">
+                  <div className="w-px h-16 bg-cowboy-leather/30 dark:bg-cowboy-gold/30">
+                    <div className="w-6 h-6 rounded-full bg-cowboy-leather dark:bg-cowboy-gold transform -translate-x-1/2 translate-y-6"></div>
+                  </div>
+                </div>
+              )}
             </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 }

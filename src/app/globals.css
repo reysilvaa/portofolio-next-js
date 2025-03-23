@@ -1,331 +1,395 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-rgb: 255, 255, 255;
+  --foreground-rgb: 30, 20, 10; /* darker for better contrast */
+  --background-rgb: 243, 233, 209; /* cowboy parchment */
+  --accent-rgb: 191, 133, 46; /* cowboy gold */
+  --secondary-rgb: 165, 74, 42; /* cowboy rust */
+  
+  /* Define cowboy theme colors */
+  --cowboy-parchment: 243, 233, 209; /* light parchment paper */
+  --cowboy-wood: 58, 29, 18; /* dark wood texture */
+  --cowboy-leather: 30, 20, 10; /* darker leather for better contrast */
+  --cowboy-gold: 191, 133, 46; /* gold accent */
+  --cowboy-rust: 165, 74, 42; /* rusty accent */
+  --cowboy-sand: 226, 204, 165; /* sandy accent */
+  
+  /* Define textures paths */
+  --texture-paper: url('/textures/old-paper.jpg');
+  --texture-wood: url('/textures/wood-grain.jpg');
+  --texture-leather: url('/textures/leather.jpg');
+}
+
+.dark {
+  --foreground-rgb: 255, 245, 230; /* lighter for better contrast */
+  --background-rgb: 58, 29, 18; /* cowboy wood */
+  --accent-rgb: 191, 133, 46; /* cowboy gold */
+  --secondary-rgb: 165, 74, 42; /* cowboy rust */
 }
 
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
+  position: relative;
+  font-size: 1.05rem; /* Slightly larger default font size */
 }
 
+/* Paper texture fallback using CSS if real texture doesn't load */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.1;
+  
+  /* Light mode - Paper texture with stains and crosshatch */
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(165, 74, 42, 0.05) 5%, transparent 30%),
+    radial-gradient(circle at 85% 25%, rgba(165, 74, 42, 0.05) 5%, transparent 30%),
+    radial-gradient(circle at 65% 60%, rgba(165, 74, 42, 0.04) 8%, transparent 25%),
+    radial-gradient(circle at 25% 85%, rgba(165, 74, 42, 0.04) 6%, transparent 20%),
+    repeating-linear-gradient(45deg, rgba(58, 42, 26, 0.01) 0px, rgba(58, 42, 26, 0.01) 1px, transparent 1px, transparent 4px),
+    repeating-linear-gradient(135deg, rgba(58, 42, 26, 0.01) 0px, rgba(58, 42, 26, 0.01) 1px, transparent 1px, transparent 4px);
+  background-attachment: fixed;
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 8px 8px, 8px 8px;
+}
+
+.dark body::before {
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(191, 133, 46, 0.08) 5%, transparent 30%),
+    radial-gradient(circle at 85% 25%, rgba(191, 133, 46, 0.08) 5%, transparent 30%),
+    radial-gradient(circle at 65% 60%, rgba(191, 133, 46, 0.06) 8%, transparent 25%),
+    radial-gradient(circle at 25% 85%, rgba(191, 133, 46, 0.06) 6%, transparent 20%),
+    repeating-linear-gradient(45deg, rgba(226, 204, 165, 0.02) 0px, rgba(226, 204, 165, 0.02) 1px, transparent 1px, transparent 4px),
+    repeating-linear-gradient(135deg, rgba(226, 204, 165, 0.02) 0px, rgba(226, 204, 165, 0.02) 1px, transparent 1px, transparent 4px);
+  opacity: 0.2;
+}
+
+/* Link styling */
 a {
   color: inherit;
   text-decoration: none;
 }
 
+/* Heading styling */
 h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
-}
-html {
-  scroll-behavior: smooth;
-}
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+  font-family: var(--font-inter, Georgia, serif);
 }
 
-@keyframes slideInFromLeft {
-  0% {
-    transform: translateX(-50px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
+/* Wanted Poster */
+.wanted-poster {
+  background-image: var(--texture-paper, none);
+  background-color: rgb(var(--cowboy-parchment));
+  background-size: cover;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  position: relative;
 }
 
-@keyframes blink {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
+.dark .wanted-poster {
+  background-image: var(--texture-wood, none);
+  background-color: rgb(var(--cowboy-wood));
+  background-size: cover;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  opacity: 0.95;
 }
 
-.animate-blink {
-  animation: blink 0.7s infinite;
+/* Western divider */
+.western-divider {
+  height: 2px;
+  width: 100%;
+  max-width: 300px;
+  position: relative;
+  margin: 1rem 0;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgb(var(--cowboy-leather)) 20%, 
+    rgb(var(--cowboy-leather)) 50%,
+    rgb(var(--cowboy-leather)) 80%, 
+    transparent 100%
+  );
 }
 
-.animate-fade-in {
-  animation: fadeIn 1s forwards;
+.dark .western-divider {
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgb(var(--cowboy-gold)) 20%, 
+    rgb(var(--cowboy-gold)) 50%,
+    rgb(var(--cowboy-gold)) 80%, 
+    transparent 100%
+  );
 }
 
-.typing-text {
+.western-divider::before,
+.western-divider::after {
+  content: "★";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgb(var(--cowboy-leather));
+  font-size: 1rem;
+}
+
+.dark .western-divider::before,
+.dark .western-divider::after {
+  color: rgb(var(--cowboy-gold));
+}
+
+.western-divider::before {
+  left: calc(50% - 60px);
+}
+
+.western-divider::after {
+  right: calc(50% - 60px);
+}
+
+/* Rope border */
+.rope-border {
+  position: relative;
+  border: 8px solid transparent;
+  border-radius: 2px;
+  background-clip: padding-box;
+}
+
+.rope-border::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  background: repeating-linear-gradient(
+    45deg,
+    rgb(var(--cowboy-leather)) 0,
+    rgb(var(--cowboy-leather)) 4px,
+    rgb(var(--cowboy-sand)) 4px,
+    rgb(var(--cowboy-sand)) 8px
+  );
+  border-radius: 2px;
+  z-index: -1;
+}
+
+.dark .rope-border::before {
+  background: repeating-linear-gradient(
+    45deg,
+    rgb(var(--cowboy-gold)) 0,
+    rgb(var(--cowboy-gold)) 4px,
+    rgb(var(--cowboy-wood)) 4px,
+    rgb(var(--cowboy-wood)) 8px
+  );
+}
+
+/* Scrapbook page */
+.scrapbook-page {
+  background-color: rgb(var(--cowboy-parchment));
+  padding: 1.5rem;
+  border: 1px solid rgba(var(--cowboy-leather), 0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.dark .scrapbook-page {
+  background-color: rgb(var(--cowboy-wood));
+  border: 1px solid rgba(var(--cowboy-gold), 0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Scrapbook tape */
+.scrapbook-tape {
+  position: absolute;
+  width: 50px;
+  height: 20px;
+  background-color: rgba(var(--cowboy-leather), 0.2);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.dark .scrapbook-tape {
+  background-color: rgba(var(--cowboy-gold), 0.2);
+}
+
+.scrapbook-tape-1 {
+  top: -10px;
+  left: 20%;
+  transform: rotate(-5deg);
+}
+
+.scrapbook-tape-2 {
+  top: -10px;
+  right: 20%;
+  transform: rotate(5deg);
+}
+
+.scrapbook-tape-3 {
+  bottom: -10px;
+  left: 20%;
+  transform: rotate(5deg);
+}
+
+.scrapbook-tape-4 {
+  bottom: -10px;
+  right: 20%;
+  transform: rotate(-5deg);
+}
+
+/* Button - Western style */
+.btn-western {
+  background-color: rgb(var(--cowboy-leather));
+  color: white;
+  border: 2px solid rgb(var(--cowboy-leather));
+  font-family: var(--font-inter, Georgia, serif);
+  padding: 0.5rem 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
   display: inline-block;
 }
 
-/* Crayon effect styles */
-.crayon-overlay {
+.btn-western:hover {
+  background-color: rgb(var(--cowboy-rust));
+  transform: translateY(-2px) rotate(-1deg);
+}
+
+.dark .btn-western {
+  background-color: rgb(var(--cowboy-gold));
+  color: rgb(var(--cowboy-wood));
+  border: 2px solid rgb(var(--cowboy-gold));
+}
+
+.dark .btn-western:hover {
+  background-color: rgb(var(--cowboy-sand));
+}
+
+/* Revolver icon */
+.revolver-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-color: rgb(var(--cowboy-leather));
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  position: relative;
+}
+
+.revolver-icon::before {
+  content: "";
   position: absolute;
-  inset: 0;
-  background: 
-    /* Main yellow crayon coloring with a textured pattern */
-    repeating-linear-gradient(
-      45deg,
-      rgba(255, 214, 0, 0.15),
-      rgba(255, 214, 0, 0.25) 2px,
-      rgba(255, 214, 0, 0.15) 3px,
-      rgba(255, 214, 0, 0.2) 4px
-    ),
-    /* Lighter yellow random strokes */
-    radial-gradient(
-      circle at 30% 40%,
-      rgba(255, 230, 0, 0.3) 10%,
-      transparent 50%
-    ),
-    /* Darker yellow strokes */
-    radial-gradient(
-      circle at 70% 60%,
-      rgba(255, 200, 0, 0.4) 10%,
-      transparent 60%
-    );
-  mix-blend-mode: color-dodge;
-  opacity: 0;
-  pointer-events: none; /* Let mouse events pass through */
+  top: 50%;
+  right: -6px;
+  width: 8px;
+  height: 4px;
+  transform: translateY(-50%);
+  background-color: rgb(var(--cowboy-leather));
 }
 
-/* Crayon drawing animation */
-@keyframes crayonDraw {
-  0% {
-    opacity: 0;
-    background-position: 0 0, 0 0, 0 0;
-    background-size: 10px 10px, 100px 100px, 150px 150px;
-  }
-  30% {
-    opacity: 0.3;
-    background-position: 5px 5px, 30px 30px, 60px 60px;
-  }
-  70% {
-    opacity: 0.7;
-    background-position: 10px 10px, 70px 70px, 120px 120px;
-  }
-  100% {
-    opacity: 0.5;
-    background-position: 0 0, 100px 100px, 200px 200px;
-    background-size: 8px 8px, 200px 200px, 250px 250px;
-  }
+.dark .revolver-icon {
+  background-color: rgb(var(--cowboy-gold));
 }
 
-.animate-crayon-draw {
-  animation: crayonDraw 1.8s forwards 0.5s;
+.dark .revolver-icon::before {
+  background-color: rgb(var(--cowboy-gold));
 }
 
-/* Keep your existing animation keyframes here */
-@keyframes slideInLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-100px);
-  }
-  100% {
+/* Sheriff Badge */
+.sheriff-badge {
+  clip-path: polygon(
+    50% 0%, 
+    61% 35%, 
+    98% 35%, 
+    68% 57%, 
+    79% 91%, 
+    50% 70%, 
+    21% 91%, 
+    32% 57%, 
+    2% 35%, 
+    39% 35%
+  );
+}
+
+/* Bullet holes */
+.bullet-holes {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, black 0%, transparent 70%);
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.8);
+  opacity: 0.7;
+}
+
+.bullet-hole-1 {
+  top: 10%;
+  right: 15%;
+}
+
+.bullet-hole-2 {
+  bottom: 20%;
+  left: 10%;
+}
+
+.bullet-hole-3 {
+  top: 30%;
+  left: 5%;
+}
+
+/* Custom clip paths */
+.clip-path-star {
+  clip-path: polygon(
+    50% 0%, 
+    61% 35%, 
+    98% 35%, 
+    68% 57%, 
+    79% 91%, 
+    50% 70%, 
+    21% 91%, 
+    32% 57%, 
+    2% 35%, 
+    39% 35%
+  );
+}
+
+.clip-path-torn-paper-bottom {
+  clip-path: polygon(
+    0% 0%,
+    5% 20%,
+    15% 15%,
+    25% 22%,
+    35% 15%,
+    45% 22%,
+    55% 15%,
+    65% 22%,
+    75% 15%,
+    85% 22%,
+    95% 15%,
+    100% 20%,
+    100% 100%,
+    0% 100%
+  );
+}
+
+/* Loading spinner */
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+
+.animate-spin {
+  animation: spinner 1.5s linear infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
     opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  0% {
-    opacity: 0;
-    transform: translateX(100px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes expandLine {
-  0% {
-    width: 0;
-  }
-  100% {
-    width: 60px;
-  }
-}
-
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes float {
-  0% {
-    opacity: 0;
-    transform: translateY(0);
-  }
-  50% {
-    opacity: 0.3;
-    transform: translateY(-20px);
-  }
-  100% {
-    opacity: 0.2;
-    transform: translateY(0);
-  }
-}
-
-@keyframes floatReverse {
-  0% {
-    opacity: 0;
-    transform: translateY(0);
-  }
-  50% {
-    opacity: 0.3;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 0.2;
-    transform: translateY(0);
-  }
-}
-
-/* Animation classes */
-.animate-slide-in-left {
-  animation: slideInLeft 0.8s forwards;
-}
-
-.animate-slide-in-right {
-  animation: slideInRight 0.8s forwards;
-}
-
-.animate-expand-line {
-  animation: expandLine 0.8s forwards 0.3s;
-}
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.8s forwards;
-}
-
-.animate-float {
-  animation: float 8s ease-in-out infinite;
-}
-
-.animate-float-reverse {
-  animation: floatReverse 7s ease-in-out infinite;
-}
-
-/* Animation keyframes for Projects section */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes expandLine {
-  from {
-    width: 0;
-  }
-  to {
-    width: 80px;
-  }
-}
-
-@keyframes cardAppear {
-  0% {
-    opacity: 0;
-    transform: translateY(40px) scale(0.9);
-  }
-  60% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes scaleFade {
-  0% {
-    opacity: 0;
-    transform: scale(0.7);
-  }
-  100% {
-    opacity: 0.2;
     transform: scale(1);
   }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
 }
 
-/* Animation classes */
-.animate-fade-in {
-  animation: fadeIn 0.8s ease-out forwards;
-}
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-
-.animate-expand-line {
-  animation: expandLine 0.8s ease-out forwards;
-}
-
-.animate-card-appear {
-  animation: cardAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.animate-scale-fade {
-  animation: scaleFade 1.2s ease-out forwards;
-}
-@keyframes scale-fade {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 0.6; }
-}
-@keyframes fade-in {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
-@keyframes expand-line {
-  0% { width: 0; }
-  100% { width: 60px; }
-}
-@keyframes card-appear {
-  0% { opacity: 0; transform: translateY(20px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-@keyframes fade-in-up {
-  0% { opacity: 0; transform: translateY(20px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-.animate-scale-fade {
-  animation: scale-fade 1.2s forwards ease-out;
-}
-.animate-fade-in {
-  animation: fade-in 1s forwards ease-out;
-}
-.animate-expand-line {
-  animation: expand-line 1.5s forwards ease-out;
-}
-.animate-card-appear {
-  animation: card-appear 0.8s forwards ease-out;
-}
-.animate-fade-in-up {
-  animation: fade-in-up 0.8s forwards ease-out;
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
 }

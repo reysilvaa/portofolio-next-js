@@ -1,15 +1,17 @@
 "use client"
 import React, { JSX, useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { WesternProjectCard } from '@/components/western-project-card';
 
 type ProjectItem = {
   id: number;
   title: string;
+  description: string;
+  image: string;
   category: string;
-  imageUrl: string;
+  tags: string[];
   link: string;
+  githubLink?: string;
 };
 
 interface ProjectsProps {
@@ -19,7 +21,7 @@ interface ProjectsProps {
 export default function Projects({ projects }: ProjectsProps): JSX.Element {
   const [isVisible, setIsVisible] = useState(false);
   const [visibleCount, setVisibleCount] = useState(3); // Initial count of visible projects
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   // Check if there are more projects to show
   const hasMore = visibleCount < projects.length;
@@ -51,87 +53,81 @@ export default function Projects({ projects }: ProjectsProps): JSX.Element {
   };
 
   return (
-    <section className="mb-24 relative" id="projects" ref={sectionRef}>
-      {/* Decorative background elements */}
-      <div className={`absolute -z-10 top-20 right-20 w-32 h-32 bg-yellow-50 rounded-full opacity-0 ${
-        isVisible ? 'animate-scale-fade' : ''
-      }`} style={{ animationDelay: '0.2s' }}></div>
-      <div className={`absolute -z-10 bottom-40 left-10 w-24 h-24 bg-blue-50 rounded-full opacity-0 ${
-        isVisible ? 'animate-scale-fade' : ''
-      }`} style={{ animationDelay: '0.4s' }}></div>
-      
-      <h2 className={`text-3xl font-bold mb-10 relative ${
-        isVisible ? 'animate-fade-in' : 'opacity-0'
-      }`}>
-        Projek
-        <span className={`block w-0 h-1 bg-yellow-400 mt-4 ${
-          isVisible ? 'animate-expand-line' : ''
-        }`}></span>
-      </h2>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.slice(0, visibleCount).map((project, index) => (
-          <div 
-            key={project.id} 
-            className={`group transform opacity-0 ${
-              isVisible ? 'animate-card-appear' : ''
-            }`} 
-            style={{ animationDelay: `${0.1 + index * 0.1}s` }}
-          >
-            <div className="overflow-hidden rounded-lg shadow-md transition-all duration-500 group-hover:shadow-2xl relative bg-white group-hover:-translate-y-2">
-              <Link href={project.link} className="block relative">
-                <div className="relative h-64 w-full overflow-hidden">
-                  <Image
-                    src={project.imageUrl}
-                    alt={project.title}
-                    fill
-                    className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div className="absolute inset-0 bg-yellow-400 mix-blend-overlay opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
-                  </div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="opacity-0 group-hover:opacity-100 text-white text-center p-6 transition-all duration-500 transform translate-y-8 group-hover:translate-y-0 w-full h-full flex flex-col items-center justify-center backdrop-blur-sm group-hover:backdrop-blur-none bg-black bg-opacity-0 group-hover:bg-opacity-50">
-                      <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-yellow-300 transition-colors duration-300">{project.title}</h3>
-                      <p className="text-md mb-5 text-white/90">{project.category}</p>
-                      <span className="inline-block px-6 py-3 border-2 border-yellow-400 rounded-full text-sm font-medium text-white hover:bg-yellow-400 hover:text-black transition-all duration-300 transform group-hover:scale-105 active:scale-95">
-                        Lihat Detail
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-              {/* Decorative corner accents */}
-              <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-yellow-400 opacity-0 group-hover:opacity-100 transition-all duration-500 transform -translate-x-1 -translate-y-1 group-hover:translate-x-0 group-hover:translate-y-0"></div>
-              <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-yellow-400 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-x-1 -translate-y-1 group-hover:translate-x-0 group-hover:translate-y-0"></div>
-              <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-yellow-400 opacity-0 group-hover:opacity-100 transition-all duration-500 transform -translate-x-1 translate-y-1 group-hover:translate-x-0 group-hover:translate-y-0"></div>
-              <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-yellow-400 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-x-1 translate-y-1 group-hover:translate-x-0 group-hover:translate-y-0"></div>
-            </div>
-          </div>
-        ))}
+    <div className="relative" ref={sectionRef}>
+      {/* Latar belakang bergaya papan pengumuman Wild West */}
+      <div className="absolute inset-0 -z-10 opacity-5 pointer-events-none">
+        <div className="w-full h-full bg-repeat"
+             style={{ 
+               backgroundImage: "url('/textures/wood-grain.jpg')",
+               backgroundSize: "400px"
+             }}>
+        </div>
       </div>
       
-      {/* Simplified View More button with Lucide React arrow */}
-      {hasMore && (
-        <div className={`mt-16 text-center ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
-             style={{ animationDelay: '0.8s' }}>
-          <button 
-            onClick={handleViewMore}
-            className="group inline-flex items-center text-gray-800 font-medium
-                   transition-all duration-300 relative
-                   focus:outline-none"
-            aria-label="Lihat lebih banyak projek"
-          >
-            <span className="relative z-10 group-hover:text-yellow-600 transition-colors duration-300">Lihat Lebih Banyak</span>
-            <span className="relative overflow-hidden ml-2 transform transition-all duration-300 group-hover:translate-x-1">
-              <ArrowRight className="w-5 h-5 inline-block text-yellow-500 group-hover:text-yellow-600 transition-colors duration-300" />
-            </span>
-            <span className="absolute bottom-0 left-0 w-full h-0.5 bg-yellow-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-          </button>
+      {/* Container utama */}
+      <div className="relative z-10">
+        {/* Dekorasi papan arah */}
+        <motion.div 
+          initial={{ opacity: 0, y: -50, rotate: -5 }}
+          animate={isVisible ? { opacity: 1, y: 0, rotate: -5 } : {}}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="relative mb-16 mx-auto w-fit transform -rotate-5"
+        >
+          <div className="bg-cowboy-wood dark:bg-cowboy-leather py-4 px-16 border-4 border-cowboy-leather dark:border-cowboy-gold shadow-xl text-center">
+            <h2 className="text-3xl font-western text-cowboy-leather dark:text-cowboy-gold tracking-wide uppercase">
+              Proyek
+            </h2>
+            <div className="western-divider w-40 h-2 mt-2 mx-auto"></div>
+          </div>
+          
+          {/* Tiang papan */}
+          <div className="absolute -bottom-14 left-1/2 transform -translate-x-1/2 w-8 h-20 bg-cowboy-wood dark:bg-cowboy-leather border-x-4 border-cowboy-leather dark:border-cowboy-gold"></div>
+        </motion.div>
+        
+        {/* Grid Proyek */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          {projects.slice(0, visibleCount).map((project, index) => (
+            <motion.div 
+              key={project.id} 
+              initial={{ opacity: 0, y: 30 }}
+              animate={isVisible ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+            >
+              <WesternProjectCard project={project} />
+            </motion.div>
+          ))}
         </div>
-      )}
-
-    
-    </section>
+        
+        {/* Tombol lihat lebih banyak */}
+        {hasMore && (
+          <motion.div 
+            className="flex justify-center mt-8"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={isVisible ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.3, delay: 0.6 }}
+          >
+            <button 
+              onClick={handleViewMore}
+              className="bg-cowboy-leather dark:bg-cowboy-gold text-white dark:text-cowboy-wood 
+                        font-western tracking-wide py-3 px-8 text-xl
+                        border-2 border-cowboy-leather dark:border-cowboy-gold
+                        shadow-md hover:bg-cowboy-rust hover:border-cowboy-rust
+                        transition-all duration-300 transform hover:scale-105 active:scale-95
+                        uppercase flex items-center relative"
+            >
+              <span>Lihat Lainnya</span>
+              
+              {/* Dekorasi peluru */}
+              <div className="absolute -right-2 -top-2 w-6 h-6 bg-cowboy-gold dark:bg-cowboy-rust rounded-full border-2 border-cowboy-leather flex items-center justify-center transform rotate-12">
+                <div className="w-1 h-3 bg-cowboy-leather"></div>
+              </div>
+              <div className="absolute -left-2 -bottom-2 w-6 h-6 bg-cowboy-gold dark:bg-cowboy-rust rounded-full border-2 border-cowboy-leather flex items-center justify-center transform -rotate-12">
+                <div className="w-1 h-3 bg-cowboy-leather"></div>
+              </div>
+            </button>
+          </motion.div>
+        )}
+      </div>
+    </div>
   );
 }
