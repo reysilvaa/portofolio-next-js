@@ -19,7 +19,7 @@ import experiences from './data/experiences';
 import educationList from './data/educationList';
 import projects from './data/projects';
 import skillCategories from './data/skillCategories';
-import testimonials from './data/testimonials';
+// import testimonials from './data/testimonials';
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState('hero');

@@ -64,7 +64,7 @@ export default function Services() {
     setActiveId(id);
   };
   
-  const handleMouseLeave = (e: MouseEvent<HTMLDivElement>) => {
+  const handleMouseLeave = () => {
     setActiveId(null);
   };
 

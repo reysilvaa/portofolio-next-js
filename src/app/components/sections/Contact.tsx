@@ -48,7 +48,8 @@ export default function Contact({ contactInfo }: ContactProps) {
         message: ''
       });
       setSubmitSuccess(true);
-    } catch (error) {
+    } catch (err) {
+      console.error('Error sending message:', err);
       setSubmitError('Terjadi kesalahan saat mengirim pesan. Silakan coba lagi.');
     } finally {
       setIsSubmitting(false);

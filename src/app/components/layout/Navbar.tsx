@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import Logo from '../ui/Logo';
@@ -12,8 +12,8 @@ export default function Navbar({ activeSection, setActiveSection }: NavbarProps)
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Navigation items
-  const navItems = [
+  // Navigation items dalam useMemo untuk menghindari re-render
+  const navItems = useMemo(() => [
     { id: 'hero', label: 'Home' },
     { id: 'about', label: 'Tentang' },
     { id: 'skills', label: 'Keahlian' },
@@ -22,7 +22,7 @@ export default function Navbar({ activeSection, setActiveSection }: NavbarProps)
     { id: 'projects', label: 'Projek' },
     // { id: 'testimonials', label: 'Testimonial' },
     { id: 'contact', label: 'Kontak' },
-  ];
+  ], []);
 
   // Handle scroll event to change navbar style
   useEffect(() => {
